@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../libs/supabase";
@@ -19,7 +20,11 @@ export default function Dashboard() {
     async function fetchWishes() {
       const {
         data: { user },
+        error: authError,
       } = await supabase.auth.getUser();
+
+      console.log("Logged in user:", user);
+      console.log("Auth error:", authError);
 
       if (!user) {
         navigate("/admin-login");
@@ -28,11 +33,15 @@ export default function Dashboard() {
 
       const { data, error } = await supabase
         .from("wishes")
-        .select("*")
+        .select("id, name, message, created_at")
         .order("created_at", { ascending: false });
+
+      console.log("Wishes returned:", data);
+      console.log("Wishes error:", error);
 
       if (error) {
         console.error("Error fetching wishes:", error);
+        alert(`Could not load wishes: ${error.message}`);
         setIsLoading(false);
         return;
       }
@@ -52,6 +61,7 @@ export default function Dashboard() {
   return (
     <main className="min-h-screen bg-[var(--color-cream)] px-6 py-10 text-[var(--color-text-primary)]">
       <div className="mx-auto max-w-6xl">
+
         {/* Header */}
         <div className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
           <div>

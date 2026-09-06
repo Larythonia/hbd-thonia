@@ -1,4 +1,6 @@
+import { Heart } from "lucide-react";
 import { Card } from "../ui/Card";
+
 
 type Wish = {
   id: string;
@@ -16,7 +18,7 @@ export function WishCard({ wish }: WishCardProps) {
     <Card className="p-6 transition-transform duration-200 hover:-translate-y-1">
       <div className="mb-4 flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-beige-light)] text-lg">
-          💌
+          <Heart className="text-[var(--color-burgundy)] h-6 w-6" />
         </div>
 
         <div>

@@ -37,7 +37,7 @@ export default function SendWish() {
 
   const copyAccountNumber = async () => {
     try {
-      await navigator.clipboard.writeText("0123456789");
+      await navigator.clipboard.writeText("8062396823");
       alert("Account number copied!");
     } catch (error) {
       console.error("Failed to copy account number:", error);
